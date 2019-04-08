@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { addTodo } from '../actions/addTodo'
 
 class AddTodo extends Component {
     state = {
@@ -9,7 +11,7 @@ class AddTodo extends Component {
             content : e.target.value
         })
     }
-    
+
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.addTodo(this.state)
@@ -26,4 +28,11 @@ class AddTodo extends Component {
     }
 }
 
-export default AddTodo;
+
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        addTodo : (todo) => {dispatch(addTodo(todo))}
+    }
+}
+
+export default connect(mapDispatchToProps)(AddTodo)
